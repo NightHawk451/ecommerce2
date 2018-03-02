@@ -17,7 +17,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@!-)jwmuzh8btr380g61=g+#&zzei&dz2(&=xbvxztady)_p(r'
+SECRET_KEY = SECRET_KEY = os.environ.get('SECRET_KEY')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -56,7 +57,7 @@ LOGIN_URL = '/login/'
 LOGIN_URL_REDIRECT = '/'
 LOGOUT_URL = '/logout/'
 
-MAILCHIMP_API_KEY           = "41014b64d7937e5b5bc8f0df0db5a8e2-us17"
+MAILCHIMP_API_KEY           = os.environ.get('MAILCHIMP_API_KEY')
 MAILCHIMP_DATA_CENTER       = 'us17'
 MAILCHIMP_EMAIL_LIST_ID     = '738202b948'
 
