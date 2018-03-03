@@ -25,6 +25,17 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['.herokuapp.com']
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'youremail@gmail.com' 
+EMAIL_HOST_PASSWORD = 'yourpassword'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Python Ecommerce <micah.r.pearce@gmail.com>"
+
+Managers = ("micah.r.pearce@gmail.com", "Micah Pearce" )
+
+ADMINS = MANAGERS
+
 
 # Application definition
 
