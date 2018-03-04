@@ -31,7 +31,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "Python Ecommerce <micah.r.pearce@gmail.com>"
 
-Managers = (
+MANAGERS = (
     ("Micah Pearce" , "micah.r.pearce@gmail.com")
 )
 
