@@ -19,6 +19,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '@!-)jwmuzh8btr380g61=g+#&zzei&dz2(&=xbvxztady)_p(r'
 
+
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -29,13 +31,16 @@ EMAIL_HOST_USER = 'goldLeader216@gmail.com'
 EMAIL_HOST_PASSWORD = 'django216'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "Python Ecommerce <micah.r.pearce@gmail.com>"
+DEFAULT_FROM_EMAIL = "micah.r.pearce@gmail.com"
 
 MANAGERS = (
     ("Micah Pearce" , "micah.r.pearce@gmail.com")
 )
 
 ADMINS = MANAGERS
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 # Application definition
 
