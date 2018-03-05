@@ -30,6 +30,7 @@ EMAIL_HOST_PASSWORD = 'django216'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Python ecommerce <goldLeader216@gmail.com>'
+BASE_URL = '127.0.0.1:8000'
 
 
 

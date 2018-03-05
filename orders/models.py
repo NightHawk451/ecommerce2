@@ -5,7 +5,7 @@ from django.db.models.signals import pre_save, post_save
 from addresses.models import Address
 from billing.models import BillingProfile
 from carts.models import Cart
-from ecommerce.utils import unique_order_id_generator
+from ecommerce.utils import unique_key_generator
 
 ORDER_STATUS_CHOICES = (
     ('created', 'Created'),
@@ -75,7 +75,7 @@ class Order(models.Model):
 
 def pre_save_create_order_id(sender, instance, *args, **kwargs):
     if not instance.order_id:
-        instance.order_id = unique_order_id_generator(instance)
+        instance.order_id = unique_key_generator(instance)
     qs = Order.objects.filter(cart=instance.cart).exclude(billing_profile=instance.billing_profile)
     if qs.exists():
         qs.update(active=False)
