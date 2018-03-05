@@ -31,7 +31,7 @@ EMAIL_HOST_USER = 'goldLeader216@gmail.com'
 EMAIL_HOST_PASSWORD = 'django216'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = "micah.r.pearce@gmail.com"
+DEFAULT_FROM_EMAIL = "goldLeader216@gmail.com"
 
 MANAGERS = (
     ("Micah Pearce" , "micah.r.pearce@gmail.com")

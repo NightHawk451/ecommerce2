@@ -35,7 +35,7 @@ DEFAULT_FROM_EMAIL = 'Python ecommerce <goldLeader216@gmail.com>'
 
 
 MANAGERS = (
-    ('Micah Pearce', "goldLeader216@gmail.com"),
+    ('Micah Pearce', "micah.r.pearce@gmail.com"),
 )
 
 ADMINS = MANAGERS
