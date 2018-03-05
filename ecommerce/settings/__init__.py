@@ -6,7 +6,7 @@ from .base import *
 
 from .production import *
 
-#from .local_micah import *
+from .local_micah import *
 
 #from .local import *
 
