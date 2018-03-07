@@ -21,7 +21,7 @@ from .signals import user_logged_in
 # def account_home_view(request):
 #     return render(request, "accounts/home.html", {})
 
-
+#
 #LoginRequiredMixin,
 class AccountHomeView(LoginRequiredMixin, DetailView):
     template_name = 'accounts/home.html'
