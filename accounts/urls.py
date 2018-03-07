@@ -14,5 +14,5 @@ urlpatterns = [
     url(r'^email/resend-activation/$', 
             AccountEmailActivateView.as_view(), 
             name='resend-activation'),
-    url(r'^details/$', UserDetailUpdateView.as_view(), name='user-update'),
+    #url(r'^details/$', UserDetailUpdateView.as_view(), name='user-update'),
 ]
