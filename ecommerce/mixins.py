@@ -1,5 +1,6 @@
 from django.utils.http import is_safe_url
 
+#this will pass the request to our form
 
 class RequestFormAttachMixin(object):
     def get_form_kwargs(self):
