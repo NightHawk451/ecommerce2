@@ -4,10 +4,10 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 
-#
 User = get_user_model()
 
-from .models import EmailActivation
+from .models import EmailActivation, GuestEmail
+
 
 class ReactivateEmailForm(forms.Form):
     email       = forms.EmailField()
@@ -22,6 +22,7 @@ class ReactivateEmailForm(forms.Form):
             raise forms.ValidationError(mark_safe(msg))
         return email
 
+
 class UserAdminCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
@@ -30,7 +31,7 @@ class UserAdminCreationForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('full_name', 'email',) # full-name)
+        fields = ('full_name', 'email',) #'full_name',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -44,17 +45,19 @@ class UserAdminCreationForm(forms.ModelForm):
         # Save the provided password in hashed format
         user = super(UserAdminCreationForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.is_active = False
         if commit:
             user.save()
         return user
 
+
+
 class UserDetailChangeForm(forms.ModelForm):
-    full_name = forms.CharField(label='Name', required=False, widget=forms.TextInput(attrs={"class": "form-control"})
-        )
+    full_name = forms.CharField(label='Name', required=False, widget=forms.TextInput(attrs={"class": 'form-control'}))
+
     class Meta:
         model = User
         fields = ['full_name']
+
 
 
 class UserAdminChangeForm(forms.ModelForm):
@@ -74,12 +77,34 @@ class UserAdminChangeForm(forms.ModelForm):
         # field does not have access to the initial value
         return self.initial["password"]
 
-class GuestForm(forms.Form):
-    email    = forms.EmailField()
+
+
+class GuestForm(forms.ModelForm):
+    #email    = forms.EmailField()
+    class Meta:
+        model = GuestEmail
+        fields = [
+            'email'
+        ]
+
+    def __init__(self, request, *args, **kwargs):
+        self.request = request
+        super(GuestForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        # Save the provided password in hashed format
+        obj = super(GuestForm, self).save(commit=False)
+        if commit:
+            obj.save()
+            request = self.request
+            request.session['guest_email_id'] = obj.id
+        return obj
+
+
 
 class LoginForm(forms.Form):
-    email       = forms.EmailField(label='email')
-    password    = forms.CharField(widget=forms.PasswordInput)
+    email    = forms.EmailField(label='Email')
+    password = forms.CharField(widget=forms.PasswordInput)
 
     def __init__(self, request, *args, **kwargs):
         self.request = request
@@ -111,13 +136,39 @@ class LoginForm(forms.Form):
                     raise forms.ValidationError(mark_safe(msg2))
                 if not is_confirmable and not email_confirm_exists:
                     raise forms.ValidationError("This user is inactive.")
-
         user = authenticate(request, username=email, password=password)
         if user is None:
             raise forms.ValidationError("Invalid credentials")
         login(request, user)
         self.user = user
         return data
+
+    # def form_valid(self, form):
+    #     request = self.request
+    #     next_ = request.GET.get('next')
+    #     next_post = request.POST.get('next')
+    #     redirect_path = next_ or next_post or None
+    #     email  = form.cleaned_data.get("email")
+    #     password  = form.cleaned_data.get("password")
+        
+    #     print(user)
+    #     if user is not None:
+    #         if not user.is_active:
+    #             print('inactive user..')
+    #             messages.success(request, "This user is inactive")
+    #             return super(LoginView, self).form_invalid(form)
+    #         login(request, user)
+    #         user_logged_in.send(user.__class__, instance=user, request=request)
+    #         try:
+    #             del request.session['guest_email_id']
+    #         except:
+    #             pass
+    #         if is_safe_url(redirect_path, request.get_host()):
+    #             return redirect(redirect_path)
+    #         else:
+    #             return redirect("/")
+    #     return super(LoginView, self).form_invalid(form)
+
 
 class RegisterForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
@@ -127,7 +178,7 @@ class RegisterForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ('full_name', 'email',) # full-name)
+        fields = ('full_name', 'email',) #'full_name',)
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -141,10 +192,9 @@ class RegisterForm(forms.ModelForm):
         # Save the provided password in hashed format
         user = super(RegisterForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.is_active = False # send confirmation email
-        # obj, is_created = EmailActivation.objects.create(user=user)
-        # objects.send_activation_email()
+        user.is_active = False # send confirmation email via signals
+        # obj = EmailActivation.objects.create(user=user)
+        # obj.send_activation_email()
         if commit:
             user.save()
         return user
-

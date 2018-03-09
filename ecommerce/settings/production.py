@@ -81,6 +81,9 @@ MAILCHIMP_EMAIL_LIST_ID     = os.environ.get('MAILCHIMP_EMAIL_LIST_ID')
 FORCE_SESSION_TO_ONE = True
 FORCE_INACTIVE_USER_ENDSESSION= False
 
+STRIPE_SECRET_KEY = "sk_test_YNr4u0rSoJMNWCClI4i6pqXw"
+STRIPE_PUB_KEY = 'pk_test_TuhLYOxlpwOfUQWvfpYIRA3y'
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
