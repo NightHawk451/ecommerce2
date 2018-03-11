@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__fil
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@!-)jwmuzh8btr380g61=g+#&zzei&dz2(&=xbvxztady)_p(r'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -26,7 +26,7 @@ ALLOWED_HOSTS = []
 
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'goldLeader216@gmail.com' 
-EMAIL_HOST_PASSWORD = 'django216'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'Python ecommerce <goldLeader216@gmail.com>'
@@ -71,15 +71,15 @@ LOGIN_URL = '/login/'
 LOGIN_URL_REDIRECT = '/'
 LOGOUT_URL = '/logout/'
 
-MAILCHIMP_API_KEY           = "81070e26ea380de520adb46f39b74477-us17"
-MAILCHIMP_DATA_CENTER       = 'us17'
-MAILCHIMP_EMAIL_LIST_ID     = '738202b948'
+MAILCHIMP_API_KEY           = ""
+MAILCHIMP_DATA_CENTER       = ''
+MAILCHIMP_EMAIL_LIST_ID     = ''
 
 FORCE_SESSION_TO_ONE = True
 FORCE_INACTIVE_USER_ENDSESSION= False
 
-STRIPE_SECRET_KEY = "sk_test_YNr4u0rSoJMNWCClI4i6pqXw"
-STRIPE_PUB_KEY = 'pk_test_TuhLYOxlpwOfUQWvfpYIRA3y'
+STRIPE_SECRET_KEY = ""
+STRIPE_PUB_KEY = ''
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
